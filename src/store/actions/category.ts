@@ -26,6 +26,7 @@ export const flattenData = (): FlattenedItem[] => {
   categories?.ids?.forEach((categoryId: number) => {
     const category = categories?.byId?.[categoryId];
     flatData.push({
+      ...category,
       uid: uid++,
       id: category.id,
       type: ENTITIES.CATEGORY,
@@ -35,6 +36,7 @@ export const flattenData = (): FlattenedItem[] => {
     category?.brandIds?.forEach((brandId: number) => {
       const brand = brands?.byId?.[brandId];
       flatData.push({
+        ...brand,
         uid: uid++,
         id: brand.id,
         type: ENTITIES.BRAND,
@@ -45,6 +47,7 @@ export const flattenData = (): FlattenedItem[] => {
       brand?.modelIds?.forEach((modelId: number) => {
         const model = models?.byId?.[modelId];
         flatData.push({
+          ...model,
           uid: uid++,
           id: model.id,
           type: ENTITIES.MODEL,

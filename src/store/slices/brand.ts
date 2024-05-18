@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { TBrandSliceState } from '../../@types/types';
 
 const initialState: TBrandSliceState = {
   data: {
@@ -7,16 +8,19 @@ const initialState: TBrandSliceState = {
         id: 1,
         name: 'Apple',
         modelIds: [1, 2],
+        isSelected: false,
       },
       2: {
         id: 2,
         name: 'Samsung',
         modelIds: [3],
+        isSelected: false,
       },
       3: {
         id: 3,
         name: 'Lenovo',
         modelIds: [4],
+        isSelected: false,
       },
     },
     ids: [1, 2, 3],

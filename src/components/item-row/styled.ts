@@ -1,31 +1,16 @@
-import { css } from 'styled-components';
 import { TEntityTypeProps } from 'src/@types/types';
 import { ENTITIES } from '../../constants/entities';
 import styled from 'styled-components/native';
 
 export const ItemRowContainer = styled.View<TEntityTypeProps>`
   flex-direction: row;
-
-  ${({ type }) =>
-    type === ENTITIES.CATEGORY &&
-    css`
-      padding-top: 15px;
-    `}
-  ${({ type }) =>
-    type === ENTITIES.BRAND &&
-    css`
-      padding-left: 10px;
-    `}
-  ${({ type }) =>
-    type === ENTITIES.MODEL &&
-    css`
-      padding-left: 20px;
-    `}
-  ${({ type }) =>
-    type === ENTITIES.VARIANT &&
-    css`
-      padding-left: 30px;
-    `}
+  padding-top: ${({ type }) => (type === ENTITIES.CATEGORY ? '15px' : '0')};
+  padding-left: ${({ type }) => {
+    if (type === ENTITIES.BRAND) return '10px';
+    else if (type === ENTITIES.MODEL) return '20px';
+    else if (type === ENTITIES.VARIANT) return '30px';
+    return '0';
+  }};
 `;
 
 export const ItemRowText = styled.Text`

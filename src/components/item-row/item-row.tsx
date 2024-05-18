@@ -10,7 +10,7 @@ export const ItemRow: React.FC<{ item: FlattenedItem }> = ({ item }) => {
     <ItemRowContainer type={item.type}>
       <CheckBox
         disabled={false}
-        value={isChecked}
+        value={item.isSelected}
         onValueChange={newValue => setIsChecked(newValue)}
       />
       <ItemRowText>{item.name}</ItemRowText>
