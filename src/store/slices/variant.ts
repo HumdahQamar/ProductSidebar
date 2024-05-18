@@ -46,9 +46,19 @@ export const brandSlice = createSlice({
     setData: (state, action: PayloadAction<string>) => {
       state.data = action.payload;
     },
+    updateSelectedVariant: (
+      state,
+      action: PayloadAction<{ id: number; isSelected: boolean }>,
+    ) => {
+      const { id, isSelected } = action.payload;
+      const item = state.data.byId[id];
+      if (item) {
+        item.isSelected = isSelected;
+      }
+    },
   },
 });
 
-export const { setData } = brandSlice.actions; // TODO: Fix this
+export const { setData, updateSelectedVariant } = brandSlice.actions; // TODO: Fix this
 
 export const variantSliceReducer = brandSlice.reducer;

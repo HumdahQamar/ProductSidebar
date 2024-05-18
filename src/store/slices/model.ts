@@ -44,9 +44,19 @@ export const modelSlice = createSlice({
     setData: (state, action: PayloadAction<string>) => {
       state.data = action.payload;
     },
+    updateSelectedModel: (
+      state,
+      action: PayloadAction<{ id: number; isSelected: boolean }>,
+    ) => {
+      const { id, isSelected } = action.payload;
+      const item = state.data?.byId?.[id];
+      if (item) {
+        item.isSelected = isSelected;
+      }
+    },
   },
 });
 
-export const { setData } = modelSlice.actions; // TODO: Fix this
+export const { setData, updateSelectedModel } = modelSlice.actions; // TODO: Fix this
 
 export const modelSliceReducer = modelSlice.reducer;

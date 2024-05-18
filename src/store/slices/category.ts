@@ -34,9 +34,19 @@ export const categorySlice = createSlice({
     setData: (state, action: PayloadAction<string>) => {
       state.data = action.payload;
     },
+    updateSelectedCategory: (
+      state,
+      action: PayloadAction<{ id: number; isSelected: boolean }>,
+    ) => {
+      const { id, isSelected } = action.payload;
+      const item = state.data.byId[id];
+      if (item) {
+        item.isSelected = isSelected;
+      }
+    },
   },
 });
 
-export const { setData } = categorySlice.actions; // TODO: Fix this
+export const { setData, updateSelectedCategory } = categorySlice.actions; // TODO: Fix this
 
 export const categorySliceReducer = categorySlice.reducer;
