@@ -1,29 +1,21 @@
-import React, { FC } from 'react';
-import { useSelector } from 'react-redux';
-import { CartItemCountText } from './styled';
-import { selectData } from '../../store/selectors/category';
-import { Chip } from '@rneui/themed';
+import React from 'react';
+import { FlatList } from 'react-native';
+import { flattenData } from '../../store/actions/category';
 import { ItemRow } from '../item-row';
+import { FlattenedItem } from '../../@types/types';
 
-export const Sidebar: FC = () => {
-  const data = useSelector(selectData);
-  console.log(data);
+const renderItem = ({ item }: { item: FlattenedItem }) => {
+  return <ItemRow item={item} />;
+};
+
+export const Sidebar = () => {
+  const data = flattenData();
 
   return (
-    <>
-      <ItemRow />
-      <Chip
-        title="Left Icon Chip"
-        icon={{
-          name: 'bluetooth',
-          type: 'font-awesome',
-          size: 20,
-          color: 'white',
-        }}
-        // onPressIcon={() => console.log('Icon pressed')}
-        containerStyle={{ marginVertical: 15 }}
-      />
-      <CartItemCountText>LALA</CartItemCountText>
-    </>
+    <FlatList
+      data={data}
+      keyExtractor={item => item.uid.toString()}
+      renderItem={renderItem}
+    />
   );
 };

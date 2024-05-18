@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { TVariantSliceState } from '../../@types/types';
 
 const initialState: TVariantSliceState = {
   data: {
@@ -7,26 +8,31 @@ const initialState: TVariantSliceState = {
         id: 1,
         desc: '128 GB - Starlight',
         modelId: 1,
+        isSelected: false,
       },
       2: {
         id: 2,
         desc: '128 GB - Midnight',
         modelId: 2,
+        isSelected: false,
       },
       3: {
         id: 3,
         desc: '256 GB - Black',
         modelId: 3,
+        isSelected: false,
       },
       4: {
         id: 4,
         desc: '16 GB RAM',
         modelId: 4,
+        isSelected: false,
       },
       5: {
         id: 5,
         desc: '128 GB - White',
         modelId: 1,
+        isSelected: false,
       },
     },
     ids: [1, 2, 3, 4, 5],

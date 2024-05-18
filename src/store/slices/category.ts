@@ -16,6 +16,7 @@ const initialState: TCategorySliceState = {
       3: {
         id: 3,
         name: 'Laptops',
+        brandIds: [3],
       },
     },
     ids: [1, 2, 3],

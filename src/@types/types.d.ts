@@ -1,6 +1,18 @@
+import { ENTITIES } from './src/constants/entities';
+
+type TObject = Record<
+  string,
+  isTypeNumber,
+  isTypeString,
+  isTypeFunction,
+  isTypeUndefined,
+  isTypeBoolen
+>;
+
 type TCategory = {
   id: number;
   name: string;
+  brandIds: number[];
 };
 
 type TBrand = {
@@ -36,4 +48,20 @@ interface TModelSliceState {
 
 interface TVariantSliceState {
   data: Record<TVariant> | null;
+}
+
+interface TEntityTypeProps {
+  type: ENTITIES.CATEGORY | ENTITIES.BRAND | ENTITIES.MODEL | ENTITIES.VARIANT;
+}
+
+interface FlattenedItem {
+  uid: number;
+  id: number;
+  type: 'category' | 'brand' | 'model' | 'variant';
+  name?: string;
+  storage?: string;
+  isSelected?: boolean;
+  attribute?: string;
+  value?: number | string;
+  parentId?: number;
 }
