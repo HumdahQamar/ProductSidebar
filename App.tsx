@@ -7,6 +7,7 @@
 
 import React from 'react';
 import type {PropsWithChildren} from 'react';
+import { Provider } from 'react-redux';
 import {
   SafeAreaView,
   ScrollView,
@@ -24,6 +25,8 @@ import {
   LearnMoreLinks,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
+import { store } from './src/store';
+
 
 type SectionProps = PropsWithChildren<{
   title: string;
@@ -55,7 +58,7 @@ function Section({children, title}: SectionProps): React.JSX.Element {
   );
 }
 
-function App(): React.JSX.Element {
+const App = () => {
   const isDarkMode = useColorScheme() === 'dark';
 
   const backgroundStyle = {
@@ -63,6 +66,7 @@ function App(): React.JSX.Element {
   };
 
   return (
+    <Provider store={store}>
     <SafeAreaView style={backgroundStyle}>
       <StatusBar
         barStyle={isDarkMode ? 'light-content' : 'dark-content'}
@@ -93,6 +97,7 @@ function App(): React.JSX.Element {
         </View>
       </ScrollView>
     </SafeAreaView>
+    </Provider>
   );
 }
 
