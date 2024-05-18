@@ -1,0 +1,50 @@
+{
+  "categories": [
+    {
+      "name": "mobile phones",
+      "brand": {
+        "name": "Apple",
+        "model": {
+          "name": "iPhone 6",
+          "variants": [
+            {
+              "storage": "128 GB",
+              "isSelected": false
+            },
+            {
+              "storage": "64 GB",
+              "isSelected": false
+            },
+            {
+              "storage": "32 GB",
+              "isSelected": false
+            },
+            {
+              "storage": "16 GB",
+              "isSelected": false
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Watches",
+      "brand": {
+        "name": "Apple",
+        "model": {
+          "name": "Apple Watch",
+          "variants": [
+            {
+              "storage": "Apple Watch SE",
+              "isSelected": false
+            },
+            {
+              "storage": "Apple Watch Sport",
+              "isSelected": false
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

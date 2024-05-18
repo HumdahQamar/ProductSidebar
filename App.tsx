@@ -1,5 +1,5 @@
 import React from 'react';
-import { Provider } from 'react-redux';
+import { Provider as ReduxStoreProvider } from 'react-redux';
 import { Sidebar } from './src/components/sidebar/sidebar';
 import { SafeAreaView, StatusBar, useColorScheme } from 'react-native';
 
@@ -14,7 +14,7 @@ const App = () => {
   };
 
   return (
-    <Provider store={store}>
+    <ReduxStoreProvider store={store}>
       <SafeAreaView style={backgroundStyle}>
         <StatusBar
           barStyle={isDarkMode ? 'light-content' : 'dark-content'}
@@ -22,7 +22,7 @@ const App = () => {
         />
         <Sidebar />
       </SafeAreaView>
-    </Provider>
+    </ReduxStoreProvider>
   );
 };
 
