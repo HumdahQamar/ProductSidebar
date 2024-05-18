@@ -1,8 +1,9 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-
 const initialState: TCategorySliceState = {
-  data: null,
+  data: {
+    categories: [{ id: 1, name: 'Category 1' }],
+  },
 };
 
 export const categorySlice = createSlice({
