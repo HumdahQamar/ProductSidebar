@@ -20,7 +20,7 @@ const initialState: TVariantSliceState = {
         id: 3,
         desc: '256 GB - Black',
         modelId: 3,
-        isSelected: true,
+        isSelected: false,
       },
       4: {
         id: 4,

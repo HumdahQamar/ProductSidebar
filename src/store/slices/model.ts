@@ -10,6 +10,7 @@ const initialState: TModelSliceState = {
         brandId: 1,
         variantIds: [1],
         isSelected: false,
+        selectedChildren: [],
       },
       2: {
         id: 2,
@@ -17,6 +18,7 @@ const initialState: TModelSliceState = {
         brandId: 1,
         variantIds: [2],
         isSelected: false,
+        selectedChildren: [],
       },
       3: {
         id: 3,
@@ -24,13 +26,15 @@ const initialState: TModelSliceState = {
         brandId: 2,
         variantIds: [3],
         isSelected: false,
+        selectedChildren: [],
       },
       4: {
         id: 4,
         name: 'ThinkPad',
         brandId: 3,
-        variantIds: [1],
+        variantIds: [5],
         isSelected: false,
+        selectedChildren: [],
       },
     },
     ids: [1, 2, 3, 4],
@@ -54,9 +58,40 @@ export const modelSlice = createSlice({
         item.isSelected = isSelected;
       }
     },
+    addSelectedModelChildren: (
+      state,
+      action: PayloadAction<{ id: number; variantId: number }>,
+    ) => {
+      const { id, variantId } = action.payload;
+      const item = state.data?.byId?.[id];
+      if (item) {
+        item.selectedChildren.push(variantId);
+        if (item.selectedChildren.length === item.variantIds.length)
+          item.isSelected = true;
+      }
+    },
+    removeSelectedModelChildren: (
+      state,
+      action: PayloadAction<{ id: number; variantId: number }>,
+    ) => {
+      const { id, variantId } = action.payload;
+      const item = state.data?.byId?.[id];
+      if (item) {
+        item.selectedChildren = item.selectedChildren.filter(
+          (cId: number) => cId !== variantId,
+        );
+        if (item.selectedChildren.length <= item.variantIds.length)
+          item.isSelected = false;
+      }
+    },
   },
 });
 
-export const { setData, updateSelectedModel } = modelSlice.actions; // TODO: Fix this
+export const {
+  setData,
+  updateSelectedModel,
+  addSelectedModelChildren,
+  removeSelectedModelChildren,
+} = modelSlice.actions; // TODO: Fix this
 
 export const modelSliceReducer = modelSlice.reducer;

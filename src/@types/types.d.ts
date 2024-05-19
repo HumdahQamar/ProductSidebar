@@ -54,6 +54,11 @@ interface TEntityTypeProps {
   type: ENTITIES.CATEGORY | ENTITIES.BRAND | ENTITIES.MODEL | ENTITIES.VARIANT;
 }
 
+interface IActionOptions {
+  dispatch?: TDispatch;
+  state: TReduxState;
+}
+
 interface FlattenedItem {
   uid: number;
   id: number;

@@ -1,12 +1,29 @@
 import { useSelector } from 'react-redux';
+import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AppDispatch } from '../index';
-import { setData } from '../slices/category';
-import { getCategoryData } from '../selectors/category';
-import { getBrandData } from '../selectors/brand';
-import { getModelData } from '../selectors/model';
-import { getVariantsData } from '../selectors/variant';
+import {
+  addSelectedCategoryChildren,
+  removeSelectedCategoryChildren,
+  setData,
+  updateSelectedCategory,
+} from '../slices/category';
+import { getCategoriesByIds, getCategoryData } from '../selectors/category';
+import { getBrandData, getBrandsByIds } from '../selectors/brand';
+import { getModelData, getModelsByIds } from '../selectors/model';
+import { getVariantsByIds, getVariantsData } from '../selectors/variant';
+import { FlattenedItem, TObject, IActionOptions } from '../../@types/types';
+import {
+  addSelectedModelChildren,
+  removeSelectedModelChildren,
+  updateSelectedModel,
+} from '../slices/model';
+import { updateSelectedVariant } from '../slices/variant';
+import {
+  addSelectedBrandChildren,
+  removeSelectedBrandChildren,
+  updateSelectedBrand,
+} from '../slices/brand';
 import { ENTITIES } from '../../constants/entities';
-import { FlattenedItem } from '../../@types/types';
 
 export const fetchData = () => async (dispatch: AppDispatch) => {
   const data = await new Promise<string>(resolve =>
@@ -14,6 +31,171 @@ export const fetchData = () => async (dispatch: AppDispatch) => {
   );
   dispatch(setData(data));
 };
+
+export const handleUpdateSelectedVariant = createAsyncThunk<
+  TObject,
+  TObject,
+  IActionOptions
+>('model/markSelected', async (payload: TObject, thunkAPI) => {
+  try {
+    thunkAPI.dispatch(updateSelectedVariant(payload));
+    const { id, isSelected } = payload;
+    const variants = getVariantsByIds(thunkAPI.getState());
+    const variant = variants?.[id];
+    if (isSelected) {
+      thunkAPI.dispatch(
+        addSelectedModelChildren({ id: variant.modelId, variantId: id }),
+      );
+    } else {
+      thunkAPI.dispatch(
+        removeSelectedModelChildren({ id: variant.modelId, variantId: id }),
+      );
+    }
+  } catch ({ statusText }: TObject) {
+    return thunkAPI.rejectWithValue(statusText);
+  }
+});
+
+export const handleUpdateSelectedModel = createAsyncThunk<
+  TObject,
+  TObject,
+  IActionOptions
+>('model/markSelected', async (payload: TObject, thunkAPI) => {
+  try {
+    thunkAPI.dispatch(updateSelectedModel(payload));
+    const { id, isSelected } = payload;
+    const models = getModelsByIds(thunkAPI.getState());
+    const model = models?.[id];
+    if (isSelected) {
+      thunkAPI.dispatch(
+        addSelectedBrandChildren({ id: model.brandId, modelId: id }),
+      );
+    } else {
+      thunkAPI.dispatch(
+        removeSelectedBrandChildren({ id: model.brandId, modelId: id }),
+      );
+    }
+  } catch ({ statusText }: TObject) {
+    return thunkAPI.rejectWithValue(statusText);
+  }
+});
+
+export const handleUpdateSelectedBrand = createAsyncThunk<
+  TObject,
+  TObject,
+  IActionOptions
+>('model/markSelected', async (requestParams: TObject, thunkAPI) => {
+  // TODO: Fix action type
+  try {
+    thunkAPI.dispatch(updateSelectedBrand(requestParams));
+    const { id, isSelected } = requestParams;
+    const brands = getBrandsByIds(thunkAPI.getState());
+    const brand = brands?.[id];
+    console.log('sel', isSelected);
+    if (isSelected) {
+      return thunkAPI.dispatch(
+        addSelectedCategoryChildren({ id: brand.categoryId, brandId: id }),
+      );
+    } else {
+      console.log('isSelected', isSelected, brand.categoryId, id);
+      return thunkAPI.dispatch(
+        removeSelectedCategoryChildren({ id: brand.categoryId, brandId: id }),
+      );
+    }
+  } catch ({ statusText }: TObject) {
+    return thunkAPI.rejectWithValue(statusText);
+  }
+});
+
+export const handleUpdateSelectedCategory = createAsyncThunk<
+  TObject,
+  TObject,
+  IActionOptions
+>('model/markSelected', async (requestParams: TObject, thunkAPI) => {
+  // TODO: Fix action type
+  try {
+    thunkAPI.dispatch(updateSelectedCategory(requestParams));
+  } catch ({ statusText }: TObject) {
+    return thunkAPI.rejectWithValue(statusText);
+  }
+});
+
+export const attemptHandleUpdateSelectedModel = createAsyncThunk<
+  TObject,
+  TObject,
+  IActionOptions
+>('model/markSelected', async (requestParams: TObject, thunkAPI) => {
+  try {
+    const { id, isSelected } = requestParams;
+    const models = getModelsByIds(thunkAPI.getState());
+    const variants = getVariantsByIds(thunkAPI.getState());
+    const model = models?.[id];
+    // if (model) {
+    thunkAPI.dispatch(handleUpdateSelectedModel(requestParams));
+    model.variantIds?.forEach((variantId: number) => {
+      const variant = variants?.[variantId];
+      if (variant) {
+        thunkAPI.dispatch(
+          handleUpdateSelectedVariant({
+            id: variantId,
+            isSelected,
+          }),
+        );
+      }
+    });
+    // }
+  } catch ({ statusText }: TObject) {
+    return thunkAPI.rejectWithValue(statusText);
+  }
+});
+
+export const attemptHandleUpdateSelectedBrand = createAsyncThunk<
+  TObject,
+  TObject,
+  IActionOptions
+>('model/markSelected', async (requestParams: TObject, thunkAPI) => {
+  // TODO: Fix action type
+  try {
+    const { id, isSelected } = requestParams;
+    const brands = getBrandsByIds(thunkAPI.getState());
+    const brand = brands?.[id];
+    // if (brand) {
+    thunkAPI.dispatch(handleUpdateSelectedBrand(requestParams));
+    brand.modelIds?.forEach((modelId: number) => {
+      thunkAPI.dispatch(
+        attemptHandleUpdateSelectedModel({ id: modelId, isSelected }),
+      );
+    });
+    // }
+  } catch ({ statusText }: TObject) {
+    return thunkAPI.rejectWithValue(statusText);
+  }
+});
+
+export const attemptHandleUpdateSelectedCategory = createAsyncThunk<
+  TObject,
+  TObject,
+  IActionOptions
+>('model/markSelected', async (requestParams: TObject, thunkAPI) => {
+  // TODO: Fix action type
+  try {
+    const { id, isSelected } = requestParams;
+    const categories = getCategoriesByIds(thunkAPI.getState());
+    const category = categories?.[id];
+    thunkAPI.dispatch(handleUpdateSelectedCategory(requestParams));
+    category.brandIds?.forEach((brandId: number) => {
+      thunkAPI.dispatch(
+        attemptHandleUpdateSelectedBrand({
+          id: brandId,
+          isSelected: isSelected,
+        }),
+      );
+    });
+    // }
+  } catch ({ statusText }: TObject) {
+    return thunkAPI.rejectWithValue(statusText);
+  }
+});
 
 export const flattenData = (): FlattenedItem[] => {
   let uid = 0;

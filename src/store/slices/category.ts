@@ -8,19 +8,22 @@ const initialState: TCategorySliceState = {
         id: 1,
         name: 'Mobile Phones',
         brandIds: [1, 2],
-        isSelected: true,
+        isSelected: false,
+        selectedChildren: [],
       },
       2: {
         id: 2,
         name: 'Watches',
         brandIds: [],
         isSelected: false,
+        selectedChildren: [],
       },
       3: {
         id: 3,
         name: 'Laptops',
         brandIds: [3],
         isSelected: false,
+        selectedChildren: [],
       },
     },
     ids: [1, 2, 3],
@@ -44,9 +47,40 @@ export const categorySlice = createSlice({
         item.isSelected = isSelected;
       }
     },
+    addSelectedCategoryChildren: (
+      state,
+      action: PayloadAction<{ id: number; brandId: number }>,
+    ) => {
+      const { id, brandId } = action.payload;
+      const item = state.data?.byId?.[id];
+      if (item) {
+        item.selectedChildren.push(brandId);
+        if (item.selectedChildren.length === item.brandIds.length)
+          item.isSelected = true;
+      }
+    },
+    removeSelectedCategoryChildren: (
+      state,
+      action: PayloadAction<{ id: number; brandId: number }>,
+    ) => {
+      const { id, brandId } = action.payload;
+      const item = state.data?.byId?.[id];
+      if (item) {
+        item.selectedChildren = item.selectedChildren.filter(
+          (cId: number) => cId !== brandId,
+        );
+        if (item.selectedChildren.length <= item.brandIds.length)
+          item.isSelected = false;
+      }
+    },
   },
 });
 
-export const { setData, updateSelectedCategory } = categorySlice.actions; // TODO: Fix this
+export const {
+  setData,
+  updateSelectedCategory,
+  addSelectedCategoryChildren,
+  removeSelectedCategoryChildren,
+} = categorySlice.actions; // TODO: Fix this
 
 export const categorySliceReducer = categorySlice.reducer;
