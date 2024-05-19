@@ -19,18 +19,21 @@ type TBrand = {
   id: number;
   categoryId: number;
   name: string;
+  isSelected: boolean;
 };
 
 type TModel = {
   id: number;
   brandId: number;
   name: string;
+  isSelected: boolean;
 };
 
 type TVariant = {
   id: number;
   modelId: number;
-  name: string;
+  name?: string;
+  desc?: string;
   isSelected: boolean;
 };
 

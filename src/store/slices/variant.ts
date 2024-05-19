@@ -34,8 +34,14 @@ const initialState: TVariantSliceState = {
         modelId: 1,
         isSelected: false,
       },
+      6: {
+        id: 6,
+        desc: '256 GB GB - Starlight',
+        modelId: 1,
+        isSelected: false,
+      },
     },
-    ids: [1, 2, 3, 4, 5],
+    ids: [1, 2, 3, 4, 5, 6],
   },
 };
 
