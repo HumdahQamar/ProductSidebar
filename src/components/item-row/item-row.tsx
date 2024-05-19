@@ -9,7 +9,7 @@ import {
   attemptHandleUpdateSelectedCategory,
   attemptHandleUpdateSelectedModel,
   handleUpdateSelectedVariant,
-} from '../../store/actions/category';
+} from '../../store/thunks';
 
 export const ItemRow: React.FC<{ item: FlattenedItem }> = ({ item }) => {
   const dispatch = useDispatch();

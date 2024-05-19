@@ -1,6 +1,6 @@
 import React from 'react';
 import { FlatList, ScrollView } from 'react-native';
-import { flattenData } from '../../store/actions/category';
+import { flattenData } from '../../store/thunks/category';
 import { ItemRow } from '../item-row';
 import { FlattenedItem } from '../../@types/types';
 import { SelectedItems } from '../selected-items';
