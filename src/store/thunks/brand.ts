@@ -6,14 +6,17 @@ import {
 import { getBrandsByIds } from '../selectors/brand';
 import { TObject, IActionOptions } from '../../@types/types';
 import { updateSelectedBrand } from '../slices/brand';
+import {
+  BRAND_SELECTED_UPDATE,
+  BRAND_SELECTED_ATTEMPT,
+} from '../action-types/brand';
 import { attemptHandleUpdateSelectedModel } from './model';
 
 export const handleUpdateSelectedBrand = createAsyncThunk<
   TObject,
   TObject,
   IActionOptions
->('model/markSelected', async (requestParams: TObject, thunkAPI) => {
-  // TODO: Fix action type
+>(BRAND_SELECTED_UPDATE, async (requestParams: TObject, thunkAPI) => {
   try {
     thunkAPI.dispatch(updateSelectedBrand(requestParams));
     const { id, isSelected } = requestParams;
@@ -39,8 +42,7 @@ export const attemptHandleUpdateSelectedBrand = createAsyncThunk<
   TObject,
   TObject,
   IActionOptions
->('model/markSelected', async (requestParams: TObject, thunkAPI) => {
-  // TODO: Fix action type
+>(BRAND_SELECTED_ATTEMPT, async (requestParams: TObject, thunkAPI) => {
   try {
     const { id, isSelected } = requestParams;
     const brands = getBrandsByIds(thunkAPI.getState());
@@ -51,7 +53,6 @@ export const attemptHandleUpdateSelectedBrand = createAsyncThunk<
         attemptHandleUpdateSelectedModel({ id: modelId, isSelected }),
       );
     });
-    // }
   } catch ({ statusText }: TObject) {
     return thunkAPI.rejectWithValue(statusText);
   }

@@ -92,6 +92,6 @@ export const {
   updateSelectedModel,
   addSelectedModelChildren,
   removeSelectedModelChildren,
-} = modelSlice.actions; // TODO: Fix this
+} = modelSlice.actions;
 
 export const modelSliceReducer = modelSlice.reducer;

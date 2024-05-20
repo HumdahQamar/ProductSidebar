@@ -65,6 +65,6 @@ export const brandSlice = createSlice({
   },
 });
 
-export const { setData, updateSelectedVariant } = brandSlice.actions; // TODO: Fix this
+export const { setData, updateSelectedVariant } = brandSlice.actions;
 
 export const variantSliceReducer = brandSlice.reducer;

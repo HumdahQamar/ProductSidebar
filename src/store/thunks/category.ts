@@ -8,6 +8,10 @@ import { getModelData } from '../selectors/model';
 import { getVariantsData } from '../selectors/variant';
 import { FlattenedItem, TObject, IActionOptions } from '../../@types/types';
 import { ENTITIES } from '../../constants/entities';
+import {
+  CATEGORY_SELECTED_UPDATE,
+  CATEGORY_SELECTED_ATTEMPT,
+} from '../action-types/category';
 import { attemptHandleUpdateSelectedBrand } from './brand';
 
 export const fetchData = () => async (dispatch: AppDispatch) => {
@@ -21,8 +25,7 @@ export const handleUpdateSelectedCategory = createAsyncThunk<
   TObject,
   TObject,
   IActionOptions
->('model/markSelected', async (requestParams: TObject, thunkAPI) => {
-  // TODO: Fix action type
+>(CATEGORY_SELECTED_UPDATE, async (requestParams: TObject, thunkAPI) => {
   try {
     return thunkAPI.dispatch(updateSelectedCategory(requestParams));
   } catch ({ statusText }: TObject) {
@@ -34,8 +37,7 @@ export const attemptHandleUpdateSelectedCategory = createAsyncThunk<
   TObject,
   TObject,
   IActionOptions
->('model/markSelected', async (requestParams: TObject, thunkAPI) => {
-  // TODO: Fix action type
+>(CATEGORY_SELECTED_ATTEMPT, async (requestParams: TObject, thunkAPI) => {
   try {
     const { id, isSelected } = requestParams;
     const categories = getCategoriesByIds(thunkAPI.getState());

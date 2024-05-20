@@ -81,6 +81,6 @@ export const {
   updateSelectedCategory,
   addSelectedCategoryChildren,
   removeSelectedCategoryChildren,
-} = categorySlice.actions; // TODO: Fix this
+} = categorySlice.actions;
 
 export const categorySliceReducer = categorySlice.reducer;

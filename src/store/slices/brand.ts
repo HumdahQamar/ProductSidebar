@@ -84,6 +84,6 @@ export const {
   updateSelectedBrand,
   addSelectedBrandChildren,
   removeSelectedBrandChildren,
-} = brandSlice.actions; // TODO: Fix this
+} = brandSlice.actions;
 
 export const brandSliceReducer = brandSlice.reducer;

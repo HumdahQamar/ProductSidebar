@@ -7,13 +7,17 @@ import {
   addSelectedBrandChildren,
   removeSelectedBrandChildren,
 } from '../slices/brand';
+import {
+  MODEL_SELECTED_UPDATE,
+  MODEL_SELECTED_ATTEMPT,
+} from '../action-types/model';
 import { handleUpdateSelectedVariant } from './variant';
 
 export const handleUpdateSelectedModel = createAsyncThunk<
   TObject,
   TObject,
   IActionOptions
->('model/markSelected', async (payload: TObject, thunkAPI) => {
+>(MODEL_SELECTED_UPDATE, async (payload: TObject, thunkAPI) => {
   try {
     thunkAPI.dispatch(updateSelectedModel(payload));
     const { id, isSelected } = payload;
@@ -37,7 +41,7 @@ export const attemptHandleUpdateSelectedModel = createAsyncThunk<
   TObject,
   TObject,
   IActionOptions
->('model/markSelected', async (requestParams: TObject, thunkAPI) => {
+>(MODEL_SELECTED_ATTEMPT, async (requestParams: TObject, thunkAPI) => {
   try {
     const { id, isSelected } = requestParams;
     const models = getModelsByIds(thunkAPI.getState());
