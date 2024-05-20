@@ -8,6 +8,7 @@ export const ChipText = styled.Text`
   border: 1px solid;
   border-radius: 5px;
   margin-right: 5px;
+  margin-top: 5px;
   padding: 5px;
   font-size: 15px;
 `;
