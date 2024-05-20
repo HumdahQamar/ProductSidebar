@@ -22,13 +22,11 @@ export const handleUpdateSelectedBrand = createAsyncThunk<
     const { id, isSelected } = requestParams;
     const brands = getBrandsByIds(thunkAPI.getState());
     const brand = brands?.[id];
-    console.log('sel', isSelected);
     if (isSelected) {
       return thunkAPI.dispatch(
         addSelectedCategoryChildren({ id: brand.categoryId, brandId: id }),
       );
     } else {
-      console.log('isSelected', isSelected, brand.categoryId, id);
       return thunkAPI.dispatch(
         removeSelectedCategoryChildren({ id: brand.categoryId, brandId: id }),
       );
