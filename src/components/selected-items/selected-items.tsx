@@ -1,6 +1,6 @@
 import React from 'react';
 import { FlatList } from 'react-native';
-import { ItemRowContainer, SelectedItemsHeader } from './styled';
+import { SelectedItemsContainer, SelectedItemsHeader } from './styled';
 import { Chip } from '../chip';
 import { useSelector } from 'react-redux';
 import { getSelectedVariants } from '../../store/selectors/variant';
@@ -78,16 +78,23 @@ export const SelectedItems: React.FC = () => {
     return data;
   };
 
-  return (
-    <ItemRowContainer>
-      <SelectedItemsHeader>Selected Items</SelectedItemsHeader>
-      <FlatList
-        data={prepareVariants()}
-        renderItem={renderItem}
-        keyExtractor={item => item.uid}
-        scrollEnabled
-        numColumns={1}
-      />
-    </ItemRowContainer>
-  );
+  const renderContent = () => {
+    if (selectedVariants.length > 0) {
+      return (
+        <>
+          <SelectedItemsHeader>Selected Items</SelectedItemsHeader>
+          <FlatList
+            data={prepareVariants()}
+            renderItem={renderItem}
+            keyExtractor={item => item.uid}
+            scrollEnabled
+            numColumns={1}
+          />
+        </>
+      );
+    }
+    return null;
+  };
+
+  return <SelectedItemsContainer>{renderContent()}</SelectedItemsContainer>;
 };

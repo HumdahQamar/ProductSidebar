@@ -7,7 +7,7 @@ export const ChipWrapper = styled.View`
 export const ChipText = styled.Text`
   border: 1px solid;
   border-radius: 5px;
-  margin: 5px;
+  margin-right: 5px;
   padding: 5px;
   font-size: 15px;
 `;
