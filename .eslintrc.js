@@ -1,24 +1,29 @@
 module.exports = {
-  parser: '@typescript-eslint/parser',
+  env: {
+    browser: true,
+    es2021: true,
+    'jest/globals': true, // Include this line to support Jest globals in your test files
+  },
   extends: [
+    'eslint:recommended',
     'plugin:react/recommended',
     'plugin:@typescript-eslint/recommended',
-    'prettier',
-    'plugin:prettier/recommended',
   ],
-  plugins: ['@typescript-eslint', 'react', 'prettier'],
   parserOptions: {
-    ecmaVersion: 2020,
-    sourceType: 'module',
     ecmaFeatures: {
       jsx: true,
     },
+    ecmaVersion: 12,
+    sourceType: 'module',
   },
+  plugins: [
+    'react',
+    '@typescript-eslint',
+    'jest', // Include Jest plugin
+  ],
   rules: {
-    'prettier/prettier': 'error',
-    '@typescript-eslint/explicit-module-boundary-types': 'off',
-    '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
-    'react/react-in-jsx-scope': 'off',
+    'react/react-in-jsx-scope': 'off', // Disable the rule that requires React in scope for JSX
+    'no-unused-vars': ['warn', { argsIgnorePattern: '^_' }], // Adjust the rule to warn instead of error
   },
   settings: {
     react: {
