@@ -7,7 +7,7 @@ import { getSelectedVariants } from '../../store/selectors/variant';
 import { getModelsByIds } from '../../store/selectors/model';
 import { TObject, TVariant } from 'src/@types/types';
 import { getBrandsByIds } from '../../store/selectors/brand';
-import { getCategoriesByIds } from '../..//store/selectors/category';
+import { getCategoriesByIds } from '../../store/selectors/category';
 import { ENTITIES } from '../../constants/entities';
 
 const renderItem = ({ item }: { item: TObject }) => {

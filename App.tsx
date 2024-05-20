@@ -9,8 +9,6 @@ const App = () => {
   const isDarkMode = useColorScheme() === 'dark';
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : 'white',
-    borderColor: 'black',
-    borderWidth: 1,
   };
 
   return (

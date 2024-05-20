@@ -51,7 +51,6 @@ export const attemptHandleUpdateSelectedCategory = createAsyncThunk<
         }),
       );
     });
-    // }
   } catch ({ statusText }: TObject) {
     return thunkAPI.rejectWithValue(statusText);
   }
