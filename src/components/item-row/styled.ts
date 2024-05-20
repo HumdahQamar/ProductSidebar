@@ -4,6 +4,7 @@ import styled from 'styled-components/native';
 
 export const ItemRowContainer = styled.View<TEntityTypeProps>`
   flex-direction: row;
+  align-items: center;
   padding-top: ${({ type }) => (type === ENTITIES.CATEGORY ? '15px' : '0')};
   padding-left: ${({ type }) => {
     if (type === ENTITIES.BRAND) return '10px';
