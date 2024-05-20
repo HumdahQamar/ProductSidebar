@@ -27,7 +27,8 @@
     "noUnusedLocals": true, // Report errors on unused locals
     "noUnusedParameters": true, // Report errors on unused parameters
     "noFallthroughCasesInSwitch": true, // Report errors for fallthrough cases in switch statements
-    "noImplicitReturns": true // Report error when not all code paths in function return a value
+    "noImplicitReturns": true, // Report error when not all code paths in function return a value
+    "allowSyntheticDefaultImports": true, // Allow default imports from modules with no default export
   },
   "include": ["src"],
   "exclude": ["node_modules", "babel.config.js", "metro.config.js", "jest.config.js"]
