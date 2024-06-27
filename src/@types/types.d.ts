@@ -43,20 +43,40 @@ type TVariant = {
   isSelected: boolean;
 };
 
+interface TCategoryData {
+  ids: number[];
+  byId: Record<TCategory>;
+}
+
+interface TBrandData {
+  ids: number[];
+  byId: Record<TBrand>;
+}
+
+interface TModelData {
+  ids: number[];
+  byId: Record<TModel>;
+}
+
+interface TVariantData {
+  ids: number[];
+  byId: Record<TVariant>;
+}
+
 interface TCategorySliceState {
-  data: Record<TCategory> | null;
+  data: TCategoryData | null;
 }
 
 interface TBrandSliceState {
-  data: Record<TBrand> | null;
+  data: TBrandData | null;
 }
 
 interface TModelSliceState {
-  data: Record<TModel> | null;
+  data: TModelData | null;
 }
 
 interface TVariantSliceState {
-  data: Record<TVariant> | null;
+  data: TVariantData | null;
 }
 
 interface TEntityTypeProps {
