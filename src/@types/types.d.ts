@@ -13,6 +13,8 @@ type TCategory = {
   id: number;
   name: string;
   brandIds: number[];
+  isSelected: boolean;
+  selectedChildren: number[];
 };
 
 type TBrand = {
@@ -20,6 +22,8 @@ type TBrand = {
   categoryId: number;
   name: string;
   isSelected: boolean;
+  modelIds: number[];
+  selectedChildren: number[];
 };
 
 type TModel = {
@@ -27,6 +31,8 @@ type TModel = {
   brandId: number;
   name: string;
   isSelected: boolean;
+  variantIds: number[];
+  selectedChildren: number[];
 };
 
 type TVariant = {
